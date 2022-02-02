@@ -1,13 +1,11 @@
 
 import './App.css';
-import noteQuiz from './Comoponents/noteQuiz'
+import NoteQuiz from './Components/noteQuiz'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
-      {noteQuiz}
+      <NoteQuiz />
     </div>
   );
 }

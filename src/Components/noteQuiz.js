@@ -1,6 +1,6 @@
 import React from 'react'
 
-class noteQuiz extends React.Component {
+class NoteQuiz extends React.Component {
     
     constructor(props){
         super(props)
@@ -9,25 +9,27 @@ class noteQuiz extends React.Component {
             guitarStrings:[]
         }
     }
-
+    // state = {
+    //     pitchClasses: [],
+    //     guitarStrings: []
+    // }
     generateCheckBox = (arr) => { 
         return (arr.map (guitString =>{
             return(
                 <h1>{guitString}</h1>
             )
         })
-
         )
     }
 
     render(){
+        console.log('CALLED BABY')
         return(
         <div>
-            {generateCheckBox(['E', 'A', 'D', 'G','B','e'])}
+            {this.generateCheckBox(['A','B'])}
         </div>
-
         )
     }
 }
 
-export default noteQuiz
+export default NoteQuiz
