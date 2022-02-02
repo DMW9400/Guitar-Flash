@@ -6,7 +6,8 @@ class NoteQuiz extends React.Component {
         super(props)
         this.state ={
             pitchClasses:[],
-            guitarStrings:[]
+            guitarStrings:[],
+            finalNotes: []
         }
     }
     
@@ -14,27 +15,17 @@ class NoteQuiz extends React.Component {
     handleStringChange = (event) => {
         const checkedBool = event.target.checked
         const selectedValue = event.target.value
-        // console.log(checkedBool, selectedValue)
         if(checkedBool){
-            console.log('Checked')
-            // this.setState(prevState => ({
-            //     guitarStrings: [...prevState.guitarStrings, 'ABC']
-            //     }, ()=>console.log(this.state))
-            // )
             this.setState({
                 guitarStrings: [...this.state.guitarStrings, selectedValue]
-            }, () => console.log(this.state.guitarStrings))
+            }, () => console.log('check:', this.state.guitarStrings))
         } 
         else {
             this.setState({
-                guitarStrings : [...this.state.guitarStrings, this.state.guitarStrings.filter(word => word !==selectedValue )]
-            }, () => console.log(this.state.guitarStrings))
+                guitarStrings : this.state.guitarStrings.filter(word => word !==selectedValue)
+            }, () => console.log('uncheck:', this.state.guitarStrings))
         }
-        //     this.setState(prevState => ({
-        //         [event.target.name]: prevState.event.target.name.filter(value => value !== selectedValue)
-        //         }, ()=>console.log(this.state))
-        //     )}
-        }
+    }
 
     generateCheckBox = (arr) => { 
         return (arr.map (guitString =>{
@@ -60,10 +51,54 @@ class NoteQuiz extends React.Component {
         )
     }
 
+    handlePitchChange = (event) => {
+        let checkedBool = event.target.checked
+        let newPitch = event.target.value
+        if (checkedBool){
+            this.setState({
+                pitchClasses:[...this.state.pitchClasses, newPitch]
+            }, ()=>console.log('pitch check', this.state.pitchClasses))
+        } else {
+            this.setState({
+                pitchClasses: this.state.pitchClasses.filter(delPitch => delPitch !== newPitch)
+            },()=>console.log('pitch uncheck:', this.state.pitchClasses))
+        }
+    }
+
+    generatePitchBoxes = (arr) => {
+        return arr.map (pitchClass => {
+            return(
+                <div>
+                    <input
+                    type = "checkbox"
+                    id = {pitchClass}
+                    key = {pitchClass}
+                    value = {pitchClass}
+                    name = 'notes'
+                    onChange = {this.handlePitchChange}
+                    />
+                    <label>{pitchClass}</label>
+                </div>
+            )
+        })
+    }
+
+    generateQuizArray = (stringArr,pitchArr) => {
+        stringArr.map(string=>{
+            let x = 0
+            while(x<pitchArr.length-1){
+
+            }
+        })
+    }
+
     render(){
         return(
         <div>
+            <h2>Guitar Strings</h2>
             {this.generateCheckBox(['E','A','D','G','B','e'])}
+            <h2>Pitch Classes</h2>
+            {this.generatePitchBoxes(['C','F','Bb','Eb','Ab','Db','Gb','B','E','A','D','G'])}
         </div>
         )
     }
